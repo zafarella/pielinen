@@ -1,0 +1,36 @@
+<!-- 
+	This file is used by the startserver tool.
+	It starts all the components (@localhost only) that are specified int this file.
+	World manager is started first.
+	serverName = the service name of the MUPE application (world manager starts the MUPE server)
+	name = the name of each component
+	package = the java package of the different managers
+	classpath the classpath where to look for the component
+	address = the address the manager connects to
+	port = the listening address address of the component
+-->
+<mupeServerConfiguration>
+	<serverName>MupeTest</serverName>
+	<description>A MUPE server, with one room</description>
+	<component>
+		<name>MupeWorldManager</name>
+		<package>com.nokia.mupe.core</package>
+		<classpath>build/:../ContentClasses.jar:../MupeCore.jar:;build/;../ContentClasses.jar;../MupeCore.jar</classpath>
+		<address>127.0.0.1</address>
+		<port>7776</port>                
+	</component>
+	<component>
+		<name>MupeClientManagerMedia</name>
+		<package>com.nokia.mupe.core</package>
+		<classpath>../MupeCore.jar</classpath>
+		<address>127.0.0.1</address>
+		<port>8781</port>
+	</component>
+	<component>
+		<name>MupeClientManagerTcpIp</name>
+		<package>com.nokia.mupe.core</package>
+		<classpath>../MupeCore.jar</classpath>
+		<address>127.0.0.1</address>
+		<port>8780</port>
+	</component>        
+</mupeServerConfiguration>

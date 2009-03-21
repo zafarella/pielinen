@@ -1,0 +1,7 @@
+<!-- Define all your resource files here and match the resourcecount attribute
+	with the number of resources -->
+
+<attribute resourcecount='1'/>
+
+
+<resource type='image' id='icon_user' url='mupe://personal.png' global='true'/>

@@ -1,0 +1,27 @@
+<template type="canvas" id="canvastest">
+	
+	<graphics id='titlebar_bg' width='100%' height='30'>
+        <clear color='black' />
+    </graphics>
+    
+    <string id='title' text='Select exhibit...' fgcolor='white' anchor='center/center/titlebar_bg'/>
+	
+	<listview id='objects' width='100%' y="30"
+		bgcolor='white' border='false' iconspacing='0'>
+    
+	    <on_select>
+	       <send>!#this#!::clientGetObject {$(this.selecteditem)}</send>
+	    </on_select>
+ 	
+ 	</listview>
+	
+	<hook name="on_num1_down">
+   		<send>!#this#!::clientGetList {Kitchen}</send>
+	</hook>
+	
+	<hook name="on_num2_down">
+   		<send>!#this#!::clientGetList {Bedroom}</send>
+	</hook>
+	
+	<allowuserinput />
+</template>
