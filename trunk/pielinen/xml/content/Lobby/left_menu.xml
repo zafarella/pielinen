@@ -1,0 +1,12 @@
+<menu leftmenu='menu'>
+	<additem name='refresh' menu='left' text='Refresh'>
+		<send>clientPoll</send>
+	</additem>
+
+	<additem name='quit' menu='left' text='Quit'>
+		<quit/>
+	</additem>
+</menu>
+
+
+     

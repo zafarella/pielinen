@@ -1,0 +1,22 @@
+<canvas id='new_user' style='color' bgcolor='dddddd'>
+    <string id='namestaticname' text='Nickname:' bold='true' x='4' y='5' />
+    <editfield id='nameeditname' text='$(client.avatarname)' anchor='top_left/bottom_left/namestaticname' max='32' width='50%' />
+
+    <string id='bt_static' text='BTID:' x='4' y='115' bold='true' />
+    <string id='bt_id' text='Getting BT ID..' anchor='top_left/top_right/bt_static' x='2' />
+    
+    <allowuserinput />
+    
+    <load plugin='bluetooth'/>
+    <call plugin='bluetooth' method='getaddress'/>
+    <on_bluetooth_getaddress_result>
+        <settext id='bt_id' text='$(new_user.bluetooth_getaddress_result)'/>
+    </on_bluetooth_getaddress_result>
+
+    <string text='Ready' size='large' bold='true' anchor='bottom_left/bottom_left/new_user' x='3' y='-3'/>
+    <on_soft1_down>
+		<send>
+			Person::clientCreate {1} {$(nameeditname.text)} {$(bt_id.text)}
+		</send>
+	</on_soft1_down>
+</canvas>

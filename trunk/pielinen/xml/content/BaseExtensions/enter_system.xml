@@ -1,0 +1,8 @@
+<!-- This command will be called by client after resource files have been loaded -->
+clientPoll
+
+
+
+<!-- example call getting extra information out from the client, in this case the screen
+	 size, allowing you to modify content for this user to fit the screen size -->
+<!-- !#this#!::clientGetUI {$(resloader.resloader.width)} {$(resloader.resloader.height)} -->

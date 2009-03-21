@@ -1,0 +1,8 @@
+<!-- 
+	An icon to the list of images
+	@param0: the title
+	@param1: the icon resource
+	@param2: the object ID 
+-->
+
+<additem ui='mainscreen' group='contents' id='contents' name='!#param2#!' text='!#param0#!' icon='!#param1#!' />

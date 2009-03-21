@@ -1,0 +1,25 @@
+<canvas title='gui' id='mainscreen' uigroup='maingroup'>
+
+    <graphics id='titlebar_bg' width='100%' height='16'>
+        <clear color='black' />
+    </graphics>
+    
+    <string id='title' text='Default project' fgcolor='white' anchor='center_left/center_left/titlebar_bg'/>
+    
+    <listview id='contents' width='90%' height='80%' x='5%' y='10%' bgcolor='aaaaaa' border='true' caption='Players:'>
+        <on_select>
+			<!-- 
+				modify what happens when you press an item, e.g.:
+				<send>!#this#!::clientSelected {$(this.selecteditem)}</send>
+			-->
+        </on_select>
+    </listview>
+
+    <additem ui='mainscreen' group='contents' id='contents' name='yx' text='kaks' icon='icon_user' />    
+
+    !#XMLGetContents#!    
+    !#/left_menu.xml#!
+    
+	<allowuserinput />	
+</canvas>
+

@@ -1,0 +1,16 @@
+<!-- 
+	Environment variables for the server. Variables are read at server restart.
+-->
+	
+<environmentVariables>	
+    <worldSaveTimer>1</worldSaveTimer>
+	<userIdleTimer>180</userIdleTimer>
+	<networkLog>false</networkLog> 
+	
+	<urlPrefix>http://mupe.no-ip.org/~mupe/</urlPrefix>
+	<localPrefix>/home/mupe/public_html/</localPrefix>
+
+	<objectFolder>obj/</objectFolder>
+	
+	<!-- add your own variables here -->
+</environmentVariables>
