@@ -7,7 +7,7 @@
 Help -> Software updates -> Available Software -> Add Site... -> 
 http://www.cs.tut.fi/~momupe/MupeTools -> Install... -> ...
   * The Subclipse plug-in
-The install/update URL is http://subclipse.tigris.org/update_1.6.x
+The install/update URL is http://subclipse.tigris.org/update_1.6.x (same procedure as for the MUPE plug-in)
 
 = Checking out the project from the repository =
 
@@ -16,6 +16,9 @@ Follow this guide http://open.ncsu.edu/se/tutorials/subclipse/index.html, namely
 You'll find our repository URL here http://code.google.com/p/pielinen/source/checkout.
 
 I use:
+
 URL: https://pielinen.googlecode.com/svn/trunk/
+
 Username: fsedlak
+
 Password: Find out your generated password here - http://code.google.com/hosting/settings
