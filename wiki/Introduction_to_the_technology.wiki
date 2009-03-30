@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#Introduction to the technology
 
 = Introduction =
 Introduction to Radio-frequency identification
