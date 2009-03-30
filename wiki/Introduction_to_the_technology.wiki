@@ -1,4 +1,4 @@
-#Introduction to the technology
+#summary Introduction to the technology
 
 = Introduction =
 Introduction to Radio-frequency identification
