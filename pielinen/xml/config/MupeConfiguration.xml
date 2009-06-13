@@ -10,12 +10,12 @@
 	port = the listening address address of the component
 -->
 <mupeServerConfiguration>
-	<serverName>MupeTest</serverName>
-	<description>A MUPE server, with one room</description>
+	<serverName>Pielinen</serverName>
+	<description>Pielinen</description>
 	<component>
 		<name>MupeWorldManager</name>
 		<package>com.nokia.mupe.core</package>
-		<classpath>build/:../ContentClasses.jar:../MupeCore.jar:;build/;../ContentClasses.jar;../MupeCore.jar</classpath>
+		<classpath>build/:../ContentClasses.jar:../MupeCore.jar:../mysql-connector-java-5.1.7-bin.jar:;build/;../ContentClasses.jar;../MupeCore.jar;../mysql-connector-java-5.1.7-bin.jar</classpath>
 		<address>127.0.0.1</address>
 		<port>7776</port>                
 	</component>

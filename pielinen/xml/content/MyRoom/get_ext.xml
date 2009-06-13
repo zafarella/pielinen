@@ -1,0 +1,7 @@
+<!-- set title -->
+<settext item='gui:scext/title' text='!#param0#!' />
+<!-- set description -->
+<settext item='gui:scext/text' text='!#param1#!' />
+<!-- switch to exhibit screen -->
+<attribute name='grouptoactivate' value='scext' />
+<event hook='activate_group' />

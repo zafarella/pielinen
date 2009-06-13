@@ -1,0 +1,38 @@
+<load plugin='nfc' />
+
+<!-- check plugin status -->
+<on_nfc_loaded_status>
+	<debug text='NFC plugin loaded: $(global.nfc_loaded_status).' />
+	<!-- if plugin not loaded -->
+	<equal value0='$(global.nfc_loaded_status)' value='no'>
+		<!-- TODO -->
+	</equal>
+	<!--if plugin loaded -->
+	<equal value0='$(global.nfc_loaded_status)' value='yes'>
+		<!-- TODO -->
+	</equal>
+</on_nfc_loaded_status>
+
+<!-- RFID chip detected -->
+<on_nfc_targetDetected_isDetected>
+	<equal value0='$(this.nfc_targetDetected_isDetected)' value='ndef_tag' nocase='true'>
+		<else>
+			<alert title='!' text='Sorry, tag is unsupported.' type='error' time='2000' />
+		</else>
+	</equal>
+</on_nfc_targetDetected_isDetected>
+
+<!-- plugin error -->
+<on_nfc_getlasterr_result>
+	<debug text='Plugin error! Description: $(this.nfc_getlasterr_result)' onscreen='true' />
+</on_nfc_getlasterr_result>
+
+<!-- RFID chip contents read -->
+<on_nfc_readNDEFMessage_recordPayload>
+	<debug text='Tag contents:' />
+	<debug text='$(this.nfc_targetDetected_tag_uid)' />
+	<debug text='$(global.nfc_readNDEFMessage_recordID)' />
+	<debug text='$(this.nfc_readNDEFMessage_recordPayload)' />
+	<!-- TODO: check and use record/payload -->
+	<send>!#this#!::clientGetGroup {$(this.nfc_targetDetected_tag_uid)}</send>
+</on_nfc_readNDEFMessage_recordPayload>

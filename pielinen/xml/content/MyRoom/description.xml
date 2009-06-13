@@ -1,0 +1,292 @@
+<template type='canvas' id='gui' active='true'>
+	
+	<!-- attributes -->
+	<attribute name='fontheight' value='$(gui.mediumfontheight)' type='int' />
+	<attribute name='barheight' value='2*$(gui.fontheight)+10' type='int' />
+	<attribute name='buttonheight' value='$(gui.fontheight)+10' type='int' />
+	<attribute name='availableheight' value='$(gui.height)-[$(gui.barheight)+$(gui.buttonheight)]' type='int' />
+	<attribute name='pictureheight' value='$(gui.availableheight)-[2*$(gui.fontheight)+12]' type='int' />
+	<attribute name='picturewidth' value='$(gui.width)-60' type='int' />
+	<attribute name='mfontheight' value='$(gui.mediumfontheight)' type='int' />
+	<multiply attr="mfontheight" value="-1" />
+	
+	<attribute name='activegroup' value='scwel' />
+	<attribute name='grouptoactivate' value='' />
+	
+	<!-- send display dimensions to the server (for image scaling) -->
+	<send notifyonly='true'>!#this#!::clientSetMaxExhibitImageDimensions {$(gui.picturewidth)} {$(gui.pictureheight)}</send>
+	
+	<!-- default element attributes -->
+	<defaults>
+		<canvas>
+			<string size='medium' />
+		</canvas>
+	</defaults>
+	
+	<!-- ************** -->
+	<!-- WELCOME SCREEN -->
+	<!-- ************** -->
+	<group id='scwel' visible='true' inherits='gui'>
+	
+		<!-- startup -->
+		<hook name='on_show'>
+			<select lock='true' />
+		</hook>
+		
+		<!-- title bar -->
+		<graphics id='bar' width='100%' height='$(gui.barheight)' bgcolor='blue'>
+			<clear color='blue' />
+		</graphics>
+		<string id='title' bold='true' text='Welcome!' fgcolor='white' anchor='center/center/bar'/>
+		
+		<!-- text -->
+		<string id='text' y='10' halign='center' width='100%' text='Press a numeric button to simulate an RFID interaction.' fgcolor='black' anchor='top_center/bottom_center/bar'/>
+		
+	</group>
+	
+	<!-- ************ -->
+	<!-- GROUP SCREEN -->
+	<!-- ************ -->
+	<group id='scgrp' visible='false' inherits='gui'>
+	
+		<!-- startup -->
+		<hook name='on_show'>
+			<select id='text' lock='true' />		
+		</hook>
+		
+		<!-- title bar -->
+		<graphics id='bar' width='100%' height='$(gui.barheight)'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='title' bold='true' text='' fgcolor='white' anchor='center/center/bar' />
+	
+		<!-- text pane -->
+		<string id='text' y='$(bar.height)+11' width='100%' height='$(gui.height)-3*$(gui.mediumfontheight)-50' selectable='true'>
+			<hook name='on_up_down'>
+				<scroll deltay='$(gui.fontheight)' />
+			</hook>
+			<hook name='on_down_down'>
+				<scroll deltay='$(gui.mfontheight)' />
+			</hook>
+		</string>
+	
+		<!-- back button -->
+		<graphics id='back' y='$(gui.height)-$(gui.mediumfontheight)-10' width='30%' height='$(gui.mediumfontheight)+10'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='backtext' bold='true' text='Back' fgcolor='white' anchor='center/center/back'/>
+	
+		<!-- objects button -->
+		<graphics id='objects' x='50%' y='$(gui.height)-$(gui.mediumfontheight)-10' width='50%' height='$(gui.mediumfontheight)+10'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='objectstext' bold='true' text='Learn more &gt;' fgcolor='yellow' anchor='center/center/objects'/>
+
+		<!-- keys -->
+		<hook name='on_soft1_down'>
+			<!-- go back to scwel -->
+			<attribute group='gui' name='grouptoactivate' value='scwel' />
+			<event group='gui' hook='activate_group' />
+		</hook>
+		<hook name='on_soft2_down'>
+			<!-- go to scsel -->
+			<send>!#this#!::clientGetSelection {0}</send>
+		</hook>
+	</group>
+	
+	<!-- ************************ -->
+	<!-- EXHIBIT SELECTION SCREEN -->
+	<!-- ************************ -->
+	<group id='scsel' visible='false' inherits='gui'>
+	
+		<!-- attributes -->
+		<attribute name='excurr' value='0' type='int' />
+		<attribute name='canleft' value='false' type='bool' />
+		<attribute name='canright' value='false' type='bool' />
+		
+		<!-- startup -->
+		<hook name='on_show'>
+			<select id='selection' lock='true' />		
+		</hook>
+		
+		<!-- hide/show left and right arrows -->
+		<hook name='upd_arrows'>
+			<!-- current exhibit is not the first -->
+			<equal id="scsel" attr="canleft">
+				<show id='left' />
+				<else>
+					<hide id='left' />
+				</else>
+			</equal>
+			<!-- current exhibit is not the last -->
+			<equal id="scsel" attr="canright">
+				<show id='right' />
+				<else>
+					<hide id='right' />
+				</else>
+			</equal>
+		</hook>
+		
+		<!-- title bar -->
+		<graphics id='bar' width='100%' height='$(gui.barheight)'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='title' bold='true' text='' fgcolor='white' anchor='center/center/bar' />
+		
+		<!-- selected exhibit number -->
+		<string id='number' width='100%' halign='center' bold='true' text='' y='3' anchor='top_center/bottom_center/bar' />
+		
+		<!-- selection window -->
+		<graphics id='selection' width='$(gui.width)-60' x='30' y='$(bar.height)+$(gui.fontheight)+6' height='$(gui.pictureheight)' selectable='true' inherits='scsel'>
+			<hook name='on_left_down'>
+				<equal id="scsel" attr="canleft">
+					<dec id='scsel' attr='excurr' />
+					<send>!#this#!::clientGetSelection {$(scsel.excurr)}</send>
+				</equal>
+			</hook>
+			<hook name='on_right_down'>
+				<equal id="scsel" attr="canright">
+					<inc id='scsel' attr='excurr' />
+					<send>!#this#!::clientGetSelection {$(scsel.excurr)}</send>
+				</equal>
+			</hook>
+			<!-- go to the exhibit screen -->
+			<hook name="on_fire_down">
+				<send>!#this#!::clientGetExhibit {$(scsel.excurr)}</send>
+			</hook>
+		</graphics>
+		
+		<!-- picture of the exhibit -->
+		<image id="picture" topmost='true' selectable='false' anchor='center/center/selection' />
+		
+		<!-- selected exhibit name -->
+		<string id='name' width='100%' halign='center' text='' y='3' anchor='top_center/bottom_center/selection' />
+		
+		<!-- left arrow -->
+		<graphics id='leftspace' width='20' y='$(bar.height)+$(gui.fontheight)+6' height='$(gui.pictureheight)' selectable='false' />
+    	<image id='left' resource='leftarrow' anchor='center/center/leftspace' />
+    	
+    	<!-- right arrow -->
+    	<graphics id='rightspace' width='20' x="$(gui.width)-20" y='$(bar.height)+$(gui.fontheight)+6' height='$(gui.pictureheight)' selectable='false' />
+    	<image id='right' resource='rightarrow' anchor='center/center/rightspace' />
+    	
+    	<!-- back button -->
+    	<graphics id='back' y='$(gui.height)-$(gui.fontheight)-10' width='30%' height="$(gui.fontheight)+10">
+        	<clear color='blue' />
+		</graphics>
+		<string id='backtext' bold='true' text='Back' fgcolor='white' anchor='center/center/back'/>
+	
+		<!-- select button -->
+		<graphics id='select' x='70%' y='$(gui.height)-$(gui.fontheight)-10' width='30%' height="$(gui.fontheight)+10">
+		    <clear color='blue' />
+		</graphics>
+		<string id='selecttext' bold='true' text='Select' fgcolor='yellow' anchor='center/center/select'/>
+		
+		<!-- keys -->
+		<hook name="on_soft1_down">
+			<!-- go back to scgrp -->
+			<attribute group='gui' name='grouptoactivate' value='scgrp' />
+			<event group='gui' hook='activate_group' />
+		</hook>
+		<hook name="on_soft2_down">
+			<!-- go to scext -->
+			<send>!#this#!::clientGetExhibit {$(scsel.excurr)}</send>
+		</hook>
+	</group>
+	
+	<!-- ************** -->
+	<!-- EXHIBIT SCREEN -->
+	<!-- ************** -->
+	<group id='scext' visible='false' inherits='gui'>
+		
+		<!-- startup -->
+		<hook name='on_show'>
+			<select id='text' lock='true' />
+			<!-- the text pane remembers its previous position -->
+			<scroll id='text' yoffset='0' />
+		</hook>
+	
+		<!-- title bar -->
+		<graphics id='bar' width='100%' height='$(gui.barheight)'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='title' bold='true' text='' fgcolor='white' anchor='center/center/bar' />
+	
+		<!-- text pane -->
+		<string id='text' y='$(bar.height)+11' width='100%' height='$(gui.height)-3*$(gui.mediumfontheight)-50' selectable='true' inherits='scext'>
+			<hook name='on_up_down'>
+				<scroll deltay='$(gui.fontheight)' />
+			</hook>
+			<hook name='on_down_down'>
+				<scroll deltay='$(gui.mfontheight)' />
+			</hook>
+		</string>
+	
+		<!-- back button -->
+		<graphics id='back' y='$(gui.height)-$(gui.mediumfontheight)-10' width='30%' height='$(gui.mediumfontheight)+10'>
+		    <clear color='blue' />
+		</graphics>
+		<string id='backtext' bold='true' text='Back' fgcolor='white' anchor='center/center/back'/>
+	
+		<!-- keys -->
+		<hook name='on_soft1_down'>
+			<!-- go back to scsel -->
+			<attribute group='gui' name='grouptoactivate' value='scsel' />
+			<event group='gui' hook='activate_group' />
+		</hook>
+	</group>
+	
+	<!-- RFID event -->
+	<hook name="on_num0_down">
+		<send>!#this#!::clientGetGroup {RFID0}</send>
+	</hook>
+	<hook name="on_num1_down">
+		<send>!#this#!::clientGetGroup {RFID1}</send>
+	</hook>
+	<hook name="on_num2_down">
+		<send>!#this#!::clientGetGroup {RFID2}</send>
+	</hook>
+	<hook name="on_num3_down">
+		<send>!#this#!::clientGetGroup {RFID3}</send>
+	</hook>
+	<hook name="on_num4_down">
+		<send>!#this#!::clientGetGroup {RFID4}</send>
+	</hook>
+	<hook name="on_num5_down">
+		<send>!#this#!::clientGetGroup {RFID5}</send>
+	</hook>
+	<hook name="on_num6_down">
+		<send>!#this#!::clientGetGroup {RFID6}</send>
+	</hook>
+	<hook name="on_num7_down">
+		<send>!#this#!::clientGetGroup {RFID7}</send>
+	</hook>
+	<hook name="on_num8_down">
+		<send>!#this#!::clientGetGroup {RFID8}</send>
+	</hook>
+	<hook name="on_num9_down">
+		<send>!#this#!::clientGetGroup {RFID9}</send>
+	</hook>
+	
+	<!-- custom hooks -->
+	<hook name='activate_group'>
+		<debug text='Switching screen from $(this.activegroup) to $(this.grouptoactivate).' />
+		<notequal attr='activegroup' value='$(this.grouptoactivate)'>
+			<hide group='$(this.activegroup)' />
+		</notequal>
+		<show group='$(this.grouptoactivate)' />
+		<attribute name='activegroup' value='$(this.grouptoactivate)' />
+	</hook>
+	
+	<!-- ~~~~~~~~~~ -->
+	<!-- NFC PLUGIN -->
+	<!-- ~~~~~~~~~~ -->
+
+	<!-- !#/nfcplugin.xml#! -->
+	
+	<!-- ~~~~~~~~~~ -->
+	<!-- ~~~~~~~~~~ -->
+	<!-- ~~~~~~~~~~ -->
+	
+	<allowuserinput />
+</template>

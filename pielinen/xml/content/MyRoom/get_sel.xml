@@ -1,0 +1,18 @@
+<!-- set group title -->
+<settext item='gui:scsel/title' text='!#param0#!' />
+<!-- set selected exhibit number -->
+<settext item='gui:scsel/number' text='!#param1#!' />
+<!-- set selected exhibit name -->
+<settext item='gui:scsel/name' text='!#param2#!' />
+<!-- set attributes -->
+<attribute item='gui:scsel/scsel' name='canleft' value='!#param3#!' type='bool' />
+<attribute item='gui:scsel/scsel' name='canright' value='!#param4#!' type='bool' />
+<attribute item='gui:scsel/scsel' name='excurr' value='!#param5#!' type='int' />
+<!-- load and set exhibit picture -->
+<resource id='res_picture' type='image' url='!#param6#!' />
+<setimage item='gui:scsel/picture' resource='res_picture' />
+<!-- hide/show left and right arrows -->
+<event item='gui:scsel/scsel' hook='upd_arrows' />
+<!-- switch to group screen -->
+<attribute name='grouptoactivate' value='scsel' />
+<event hook='activate_group' />

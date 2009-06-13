@@ -1,0 +1,11 @@
+<!-- set title -->
+<settext item='gui:scgrp/title' text='!#param0#!' />
+<!-- set description -->
+<settext item='gui:scgrp/text' text='!#param1#!' />
+<!-- focus at the pane -->
+<select item='gui:scgrp/text' lock='true' />
+<!-- scroll the pane to the top -->
+<scroll item='gui:scgrp/text' yoffset='0' />
+<!-- switch to group screen -->
+<attribute name='grouptoactivate' value='scgrp' />
+<event hook='activate_group' />
