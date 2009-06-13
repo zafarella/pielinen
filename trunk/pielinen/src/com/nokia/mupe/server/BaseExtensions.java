@@ -14,6 +14,8 @@
  */
 package com.nokia.mupe.server;
 
+import com.nokia.mupe.server.data.*;
+
 /**
  * Base class extensions by users should all be put here. 
  * 

@@ -15,6 +15,9 @@
 
 package com.nokia.mupe.server;
 
+import com.nokia.mupe.server.data.Museum;
+import com.nokia.mupe.server.data.ExhibitImage;
+
 /**
  * World is the world used in each application.
  * 
@@ -53,7 +56,7 @@ public class World extends AbstractWorld {
      * @see com.nokia.mupe.server.MupeWorldContentBuilderInterface#createDefaultRoom()
      */
     public Room createDefaultRoom() throws MupeException {
-    	return new ItemsList(null, null, "DefaultRoom"); 
+    	return new MyRoom(null, null, "DefaultRoom"); 
     }
 
     /**
@@ -80,20 +83,16 @@ public class World extends AbstractWorld {
      * @return creator form
      * @throws MupeException
      */
-    public String clientCreateUser(User caller, String type)
-            throws MupeException {
-        if (type.equals("observer")) {
-            return ObserverUser.clientGetCreator(caller, "ObserverUser", observerRoom().idString());
-        } else {
-            return Person.clientGetCreator(caller, "Person");
-        }
+    public String clientCreateUser(User caller, String type) throws MupeException {
+        return Person.clientGetCreator(caller, "Person");
     }
 
     /**
      * @see com.nokia.mupe.server.MupeWorldContentBuilderInterface#createWorldContent()
      */
     public void createWorldContent() throws MupeException {
-        // TODO add your own content creation here
+        Museum.initialize();
+        ExhibitImage.initialize();
     }    
     
     // ***** PRIVATE *****
