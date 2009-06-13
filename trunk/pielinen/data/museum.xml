@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<museum>
+	<group id="RFID1" title="Hunters rifles (1890-1930)">
+		<text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor tellus et lacus sagittis tincidunt. Cras vel nisi vitae est interdum congue. Proin accumsan. Vestibulum ac lorem sit amet orci commodo accumsan.</text>
+		<exhibit title="Rifle #1">
+			<text>Rifle #1 description...</text>
+		</exhibit>
+		<exhibit title="Rifle #2">
+			<text>Rifle #2 description...</text>
+		</exhibit>
+	</group>
+	<group id="RFID2" title="Upperclass living room (1880)">
+		<text>Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room Upperclass living room</text>
+		<exhibit title="Piano">
+			<text>Piano description</text>
+		</exhibit>
+		<exhibit title="Mans suite">
+			<text>Suite description.</text>
+		</exhibit>
+		<exhibit title="Oil lamp">
+			<text>Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description. Lamp description.</text>
+		</exhibit>
+	</group>
+</museum>
