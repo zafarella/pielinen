@@ -1,18 +1,19 @@
 <project name="MUPE" default="compile" basedir=".">
 
-	<property file="build.properties"/>
+	<property file="build.properties" />
 
-	<property name="app.name" value="MupeServer"/>
-	<property name="build.home" value="build"/>
-	<property name="dist.home" value="."/>
-	<property name="src.home" value="src"/>
+	<property name="app.name" value="MupeServer" />
+	<property name="build.home" value="build" />
+	<property name="dist.home" value="." />
+	<property name="src.home" value="src" />
 
-	<property name="compile.debug" value="false"/>
-	<property name="compile.deprecation" value="false"/>
-	<property name="compile.optimize" value="true"/>
+	<property name="compile.debug" value="false" />
+	<property name="compile.deprecation" value="false" />
+	<property name="compile.optimize" value="true" />
 
-	<property name="main-class" value="com.nokia.mupe.core.startserver.StartServer"/>	
-	
+	<property name="main-class"
+	          value="com.nokia.mupe.core.startserver.StartServer" />
+
 	<path id="compile.classpath">
 		<pathelement path="../mysql-connector-java-5.1.7-bin.jar" />
 		<pathelement path="../MupeCore.jar" />
@@ -20,32 +21,36 @@
 	</path>
 
 	<target name="clean">
-		<delete dir="${build.home}"/>
-		<delete file="${app.name}.jar"/>
+		<delete dir="${build.home}" />
+		<delete file="${app.name}.jar" />
 	</target>
 
 	<target name="compile" depends="prepare">
-		<javac srcdir="${src.home}" destdir="${build.home}" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
-			<classpath refid="compile.classpath"/>
+		<javac srcdir="${src.home}"
+		       destdir="${build.home}"
+		       debug="${compile.debug}"
+		       deprecation="${compile.deprecation}"
+		       optimize="${compile.optimize}">
+			<classpath refid="compile.classpath" />
 		</javac>
 	</target>
 
 	<target name="dist" depends="compile">
-		<jar jarfile="${app.name}.jar" basedir="${build.home}"/>
+		<jar jarfile="${app.name}.jar" basedir="${build.home}" />
 	</target>
 
 	<target name="prepare">
-		<mkdir dir="${build.home}"/>
+		<mkdir dir="${build.home}" />
 	</target>
 
 	<target name="run" depends="compile">
 		<java classname="${main-class}" fork="true">
 			<classpath>
-				<pathelement location="."/>
-				<pathelement location="${build.home}"/>
-				<path refid="compile.classpath"/>
+				<pathelement location="." />
+				<pathelement location="${build.home}" />
+				<path refid="compile.classpath" />
 			</classpath>
-		</java>	
+		</java>
 	</target>
 
 </project>
